@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbrdar5xdrcyx"]
+
+[ext_resource type="Texture2D" uid="uid://qad3bjihydx4" path="res://icon.svg" id="1_dd6ai"]
+[ext_resource type="PackedScene" uid="uid://bmm44q7fwrjdu" path="res://Scenes/Player.tscn" id="1_tvnqe"]
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="2_ogg58"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ivb5q"]
+
+[node name="Main" type="Node"]
+
+[node name="World" type="Area2D" parent="."]
+
+[node name="Player" parent="World" instance=ExtResource("1_tvnqe")]
+position = Vector2(800, 600)
+
+[node name="Camera2D" type="Camera2D" parent="World/Player"]
+limit_left = 0
+limit_right = 1600
+limit_bottom = 1180
+script = ExtResource("2_ogg58")
+
+[node name="Sprite2D" type="Sprite2D" parent="World"]
+position = Vector2(354, 195)
+scale = Vector2(8.5625, 6.625)
+texture = ExtResource("1_dd6ai")
+
+[node name="BottomBorder" type="StaticBody2D" parent="World"]
+position = Vector2(0, 1170)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BottomBorder"]
+shape = SubResource("WorldBoundaryShape2D_ivb5q")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/BottomBorder"]
+scale = Vector2(100, 1)
+texture = ExtResource("1_dd6ai")
+offset = Vector2(0, 16)
